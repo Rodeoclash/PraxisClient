@@ -1,0 +1,106 @@
+[
+   [
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      },
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      },
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      },
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      }
+   ],
+   [
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      },
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      },
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      }
+   ],
+   [
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      },
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      }
+   ],
+   [
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      },
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      },
+      {
+        "imagePath": "images/tiles/terrian/0.png",
+        "offset": [0, 0]
+      },
+      {
+        "imagePath": "images/tiles/terrian/1.png",
+        "offset": [0, -7]
+      }
+   ]
+]

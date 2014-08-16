@@ -1,0 +1,55 @@
+[
+   [
+      {},
+      {},
+      {
+        "imagePath": "images/tiles/decorations/1.png",
+        "offset": [44, -10]
+      },
+      {},
+      {},
+      {}
+   ],
+   [
+      {},
+      {
+        "imagePath": "images/tiles/decorations/0.png",
+        "offset": [44, -10]
+      },
+      {},
+      {},
+      {},
+      {
+        "imagePath": "images/tiles/decorations/0.png",
+        "offset": [44, -10]
+      }
+   ],
+   [
+      {},
+      {
+        "imagePath": "images/tiles/decorations/0.png",
+        "offset": [44, -10]
+      },
+      {},
+      {},
+      {},
+      {
+        "imagePath": "images/tiles/decorations/0.png",
+        "offset": [44, -10]
+      }
+   ],
+   [
+      {},
+      {
+        "imagePath": "images/tiles/decorations/0.png",
+        "offset": [44, -10]
+      },
+      {},
+      {},
+      {},
+      {
+        "imagePath": "images/tiles/decorations/0.png",
+        "offset": [44, -10]
+      }
+   ]
+]

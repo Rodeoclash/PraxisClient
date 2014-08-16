@@ -1,0 +1,8 @@
+name: PraxisClient
+version: 0.0.1
+author: Samuel Richardson
+description: Praxis game client
+homepage: http://www.richardson.co.nz
+dependencies:
+  browser: any
+  pixi: any
