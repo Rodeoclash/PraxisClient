@@ -1,10 +1,14 @@
 library grid;
 
-import '../coordinate.dart';
+import 'coordinate.dart' as Coordinate;
 
-abstract class Grid {
+class DataGrid {
 
   List<List> data;
+
+  DataGrid(this.data) {
+
+  }
 
   void forEachRow(cb) {
     for (var r = 0; r < height(); r++) {
@@ -15,7 +19,7 @@ abstract class Grid {
   void forEachCell(cb) {
     forEachRow((List rowData, num rowIdx) {
       for (var c = 0; c < width(); c++) {
-        cb.call(rowData[c], new CellCoordinate(c, rowIdx));
+        cb.call(rowData[c], new Coordinate.Cell(c, rowIdx));
       }
     });
   }
@@ -26,18 +30,6 @@ abstract class Grid {
       if (rowIdx >= s && rowIdx <= f) {
         cb(rowData, count);
         count += 1;
-      }
-    });
-  }
-
-  void forSubGrid(num x1, num x2, num y1, num y2, cb) {
-    forEachRowBetween(y1, y2, (List rowData, num rowIdx) {
-      var count = 0;
-      for (var c = 0; c < rowData.length; c++) {
-        if (c >= x1 && c <= x2) {
-          cb(rowData[c], new CellCoordinate(count, rowIdx));
-          count += 1;
-        }
       }
     });
   }
