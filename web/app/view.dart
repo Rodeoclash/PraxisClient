@@ -1,84 +1,95 @@
 library view;
 
+import 'dart:math';
 import 'dart:html';
+import 'dart:async';
 import 'package:pixi/pixi.dart';
+import '../app.dart';
 import 'coordinate.dart' as Coordinate;
-
-part 'view/offset.dart';
 
 class View {
 
-  static final num TILE_WIDTH = 50;
-  static final num TILE_HEIGHT = 50;
+  static final GROUP_SIZE = 8;
 
+  num offsetX = 0, offsetY = 0;
+  Coordinate.Cell offset;
+  Point topLeft;
+  Point bottomRight;
   WebGLRenderer renderer;
   Stage stage;
-  Offset offset;
+  DisplayObjectContainer terrianContainer;
+  num screenWidthPx, screenHeightPx, viewDistance;
+  num widthOffset, heightOffset;
+  StreamController onScrollController = new StreamController();
+  Stream onScroll;
 
   View() {
-
-    // handle smooth scrolling
-    offset = new Offset();
+    App.log.info('Initialized view');
 
     // renderer and append to stage
     renderer = new WebGLRenderer(interactive: true);
+
     document.body.append(this.renderer.view);
+
+    // holds terrian tiles
+    terrianContainer = new DisplayObjectContainer();
 
     // stage
     stage = new Stage(new Colour.fromHtml('#fcf'));
+    stage.children.add(terrianContainer);
 
     // detect changes in screen size resize the rendering area
-    window.onResize.forEach( (e) { _resizeRendererToClient(); });
+    window.onResize.forEach( (e) => _windowResized() );
 
     // trigger resize on load
-    _resizeRendererToClient();
+    _windowResized();
 
-  }
+    // event emitter for scrolling
+    onScroll = onScrollController.stream;
 
-  void _resizeRendererToClient() {
-    renderer.resize(window.innerWidth, window.innerHeight);
-  }
-
-  void clear() {
-    stage.children.clear();
+    // trigger scroll
+    _afterScroll();
   }
 
   void render() {
     this.renderer.render(stage);
   }
 
-  num widthOffset() {
-    return screenWidthPx() / 2 - TILE_WIDTH;
+  void _windowResized() {
+    renderer.resize(window.innerWidth, window.innerHeight);
+    screenWidthPx = window.innerWidth;
+    screenHeightPx = window.innerHeight;
+    widthOffset = screenWidthPx / 2 - App.TILE_WIDTH;
+    heightOffset = screenHeightPx / 2 - App.TILE_WIDTH;
+    viewDistance = 1000;
   }
 
-  num heightOffset() {
-    return screenHeightPx() / 2 - TILE_WIDTH;
+  String getGroup() {
+    return "${(offset.x / GROUP_SIZE).floor()},${(offset.y / GROUP_SIZE).floor()}";
   }
 
-  num screenWidthPx() {
-    return window.innerWidth;
+  void scrollUp() {
+    offsetY -= App.SCROLL_SPEED;
+    _afterScroll();
   }
 
-  num screenHeightPx() {
-    return window.innerHeight;
+  void scrollDown() {
+    offsetY += App.SCROLL_SPEED;
+    _afterScroll();
   }
 
-  num viewDistance() {
-    return screenHeightPx() / TILE_WIDTH * 2;
+  void scrollLeft() {
+    offsetX -= App.SCROLL_SPEED;
+    _afterScroll();
   }
 
-  bool cellCoordinateOnScreen(Coordinate.Cell coordinate) {
-    return cellCoordinateOnScreenX(coordinate) && cellCoordinateOnScreenY(coordinate);
+  void scrollRight() {
+    offsetX += App.SCROLL_SPEED;
+    _afterScroll();
   }
 
-  bool cellCoordinateOnScreenX(Coordinate.Cell coordinate) {
-    var cellOffset = offset.cellCoordinate();
-    return coordinate.x >= cellOffset.x && coordinate.x <= cellOffset.x + viewDistance();
-  }
-
-  bool cellCoordinateOnScreenY(Coordinate.Cell coordinate) {
-    var cellOffset = offset.cellCoordinate();
-    return coordinate.y >= cellOffset.y && coordinate.y <= cellOffset.y + viewDistance();
+  void _afterScroll() {
+    offset = new Coordinate.Isometric(offsetX, offsetY).toCell();
   }
 
 }

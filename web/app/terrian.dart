@@ -1,32 +1,43 @@
-library zone;
+library terrian;
 
 import 'dart:math';
 import 'package:dartemis/dartemis.dart';
 import 'data_grid.dart';
-import 'coordinate.dart' as Coordinate;
 import 'view.dart';
+import 'coordinate.dart' as Coordinate;
 import 'components.dart';
 
 class Terrian {
 
-  static final FAKE_DATA_WIDTH = 64;
-  static final FAKE_DATA_HEIGHT = 64;
+  static final FAKE_DATA_WIDTH = 16;
+  static final FAKE_DATA_HEIGHT = 16;
+
   World world;
   View view;
-  List<Entity> tiles = new List();
+  DataGrid terrianData;
+  GroupManager groupManager;
 
-  Terrian(this.world, this.view) {
+  Terrian(this.world, this.view, this.groupManager) {
 
     // generate a set of entities for the random terrian
-    var terrianDataGrid = new DataGrid(_randomTerrian());
+    terrianData = new DataGrid(_randomTerrian());
 
-    terrianDataGrid.forEachCell((Map data, Coordinate.Cell coordinateCell) {
+    // listen to scroll events and register terrian tiles
+    // view.onScroll.listen(_viewScrolled);
+
+    // add entities based on visible data
+    terrianData.forEachCell(View.GROUP_SIZE, (Map data, List<String>groupLabels, Coordinate.Cell coordinate) {
       var entity = world.createEntity();
-      entity.addComponent(new Tile(data, coordinateCell, view));
-      tiles.add(entity);
+      entity.addComponent(new Tile(data, coordinate.toIsometric()));
       world.addEntity(entity);
+      for (String groupLabel in groupLabels) {
+        groupManager.add(entity, groupLabel);
+      }
     });
 
+  }
+
+  void _viewScrolled() {
   }
 
   List _randomTerrian() {

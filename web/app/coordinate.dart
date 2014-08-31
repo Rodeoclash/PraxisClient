@@ -1,6 +1,6 @@
 library coordinate;
 
-import 'view.dart';
+import '../app.dart';
 
 part 'coordinate/cell.dart';
 part 'coordinate/cartisan.dart';

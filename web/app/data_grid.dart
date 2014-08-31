@@ -6,9 +6,7 @@ class DataGrid {
 
   List<List> data;
 
-  DataGrid(this.data) {
-
-  }
+  DataGrid(this.data);
 
   void forEachRow(cb) {
     for (var r = 0; r < height(); r++) {
@@ -16,22 +14,31 @@ class DataGrid {
     }
   }
 
-  void forEachCell(cb) {
+  void forEachCell(num groupSize, cb) {
     forEachRow((List rowData, num rowIdx) {
       for (var c = 0; c < width(); c++) {
-        cb.call(rowData[c], new Coordinate.Cell(c, rowIdx));
+        num gX = (c / groupSize).floor();
+        num gY = (rowIdx / groupSize).floor();
+        cb.call(rowData[c], [
+                              '${gX},${gY}',
+                              '${gX+1},${gY}',
+                              '${gX-1},${gY}',
+                              '${gX},${gY+1}',
+                              '${gX},${gY-1}',
+                              '${gX-1},${gY-1}',
+                              '${gX+1},${gY+1}'
+                            ]
+        , new Coordinate.Cell(c, rowIdx));
       }
     });
   }
 
-  void forEachRowBetween(s, f, cb) {
-    var count = 0;
-    forEachRow((List rowData, num rowIdx) {
-      if (rowIdx >= s && rowIdx <= f) {
-        cb(rowData, count);
-        count += 1;
+  void forSubGrid(bounds, cb) {
+    for (num rowCount = bounds.topLeftCell.y; rowCount <= bounds.bottomRightCell.y; rowCount++) {
+      for (num colCount = bounds.topLeftCell.x; colCount <= bounds.bottomRightCell.x; colCount++) {
+        cb(data[rowCount][colCount], new Coordinate.Cell(colCount, rowCount));
       }
-    });
+    }
   }
 
   num width() {

@@ -7,7 +7,7 @@ class Cartisan extends Coordinate {
   }
 
   Cell toCell() {
-    return new Cell((x / View.TILE_HEIGHT).round() - 1, (y / View.TILE_HEIGHT).round());
+    return new Cell((x / App.TILE_HEIGHT).floor(), (y / App.TILE_HEIGHT).floor());
   }
 
   Isometric toIsometric() {

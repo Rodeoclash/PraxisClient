@@ -1,17 +1,22 @@
 import 'dart:html';
 import 'package:logging/logging.dart';
 import 'package:dartemis/dartemis.dart';
-import 'app/terrian.dart';
 import 'app/view.dart';
+import 'app/terrian.dart';
 import 'app/systems.dart';
 
 class App {
 
   static final Logger log = new Logger('PraxisLog');
+  static final num TILE_WIDTH = 50;
+  static final num TILE_HEIGHT = 50;
+  static final num SCROLL_SPEED = 7;
+
   World world;
-  View view;
   Terrian terrian;
   KeyboardInput keyboardInput;
+  View view;
+  GroupManager groupManager = new GroupManager();
 
   App() {
 
@@ -21,17 +26,23 @@ class App {
       print('${rec.level.name}: ${rec.time}: ${rec.message}');
     });
 
+    // create
+
     log.info("Application started");
 
+    // wrapper around Pixi rendering
     view = new View();
 
+    // dartemis setup
     world = new World();
+    world.addManager(groupManager);
     world.addSystem(new KeyboardInput());
-    world.addSystem(new RenderTile(view));
+    world.addSystem(new RenderTiles(view, groupManager));
     world.addSystem(new ViewScroll(view));
     world.initialize();
 
-    terrian = new Terrian(world, view);
+    // loads data
+    terrian = new Terrian(world, view, groupManager);
 
     // start the main game loop
     window.requestAnimationFrame(this._gameLoop);
@@ -39,8 +50,8 @@ class App {
   }
 
   void _gameLoop(var num) {
-    view.clear();
     world.process();
+    world.delta = 1.0 / 60.0 * 100;
     view.render();
     window.requestAnimationFrame(this._gameLoop);
   }
