@@ -7,13 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PraxisClient</title>
 
-    <script async type="application/dart" src="app.dart"></script>
+    <script src="packages/web_components/platform.js"></script>
+    <script src="packages/web_components/dart_support.js"></script>
+    <link rel="import" href="app/elements/click_counter.html">
+
     <script async src="packages/browser/dart.js"></script>
+    <script async type="application/dart" src="app.dart"></script>
 
     <link rel="stylesheet" href="styles.css">
 
   </head>
   <body>
-
+    <div id="ui">
+    </div>
+    <!--<script type="application/dart">export 'package:polymer/init.dart';</script>-->
   </body>
 </html>

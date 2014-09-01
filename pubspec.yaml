@@ -8,3 +8,7 @@ dependencies:
   dartemis: 0.6.0
   logging: 0.9.2
   pixi: 0.1.2
+  polymer: any
+transformers:
+- polymer:
+    entry_points: web/index.html
