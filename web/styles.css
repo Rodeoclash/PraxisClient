@@ -1,3 +1,5 @@
+@import 'styles/vendor/normalize.css';
+
 body, html {
   background-color: #ffffff;
   font-family: 'Open Sans', sans-serif;

@@ -4,12 +4,12 @@ class KeyboardInput extends VoidEntitySystem {
 
   Map<num, bool> keysDown = {};
 
-  KeyboardInput();
+  KeyboardInput() : super();
 
   void initialize() {
-    App.log.info('Initialized keyboard input system');
     document.body.onKeyDown.listen(_onKeyDown);
     document.body.onKeyUp.listen(_onKeyUp);
+    App.log.info('Initialized keyboard input system');
   }
 
   void processSystem() {
@@ -21,12 +21,10 @@ class KeyboardInput extends VoidEntitySystem {
   }
 
   void _onKeyDown(KeyboardEvent e) {
-    //App.log.info("Key down: ${e.keyCode}");
     keysDown[e.keyCode] = true;
   }
 
   void _onKeyUp(KeyboardEvent e) {
-    //App.log.info("Key up: ${e.keyCode}");
     keysDown[e.keyCode] = false;
   }
 

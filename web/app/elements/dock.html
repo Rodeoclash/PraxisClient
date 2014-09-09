@@ -1,0 +1,36 @@
+<link rel="import" href="../packages/polymer/polymer.html">
+<polymer-element name="praxis-dock">
+  <template>
+    <style>
+    :host {
+      position: absolute;
+      height: 50px;
+      right: 0;
+      left: 10%;
+      right: 10%;
+      bottom: 0;
+      background: rgba(0,0,0,0.75);
+    }
+
+    :host a {
+      color: #fff;
+      display: block;
+      height: 50px;
+      line-height: 50px;
+      float: left;
+      margin: 0 0 0 20px;
+      cursor: pointer;
+    }
+
+      :host a:hover {
+        text-decoration: underline;
+      }
+
+    </style>
+    <content>
+      <a on-click="{{toggleDebugging}}">Debugging</a>
+      <a on-click="{{toggleTerrianEditor}}">Terrian editor</a>
+    </content>
+  </template>
+  <script type="application/dart" src="dock.dart"></script>
+</polymer-element>

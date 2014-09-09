@@ -14,4 +14,8 @@ class Cartisan extends Coordinate {
     return new Isometric(x - y, (x + y) / 2);
   }
 
+  String group() {
+    return toCell().group();
+  }
+
 }

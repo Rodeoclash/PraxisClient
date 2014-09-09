@@ -14,4 +14,12 @@ class Isometric extends Coordinate {
     return toCartesian().toCell();
   }
 
+  List<String> groupNeighbors() {
+    return toCell().groupNeighbors();
+  }
+
+  String group() {
+    return toCell().group();
+  }
+
 }

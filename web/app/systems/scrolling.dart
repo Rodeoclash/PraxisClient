@@ -1,30 +1,29 @@
 part of systems;
 
-class ViewScroll extends VoidEntitySystem {
+class Scrolling extends VoidEntitySystem {
 
-  View view;
-
-  ViewScroll(this.view);
+  Scrolling() : super();
 
   void initialize() {
-    App.log.info('Initialized view scroll system');
+    App.log.info('Initialized scrolling system');
   }
 
   void processSystem() {
 
     KeyboardInput keyboardInputSystem = world.getSystem(KeyboardInput);
+    TerrianRender terrianRenderSystem = world.getSystem(TerrianRender);
 
     if (keyboardInputSystem.keyDown(87)) {
-      view.scrollUp();
+      terrianRenderSystem.scrollUp();
     }
     if (keyboardInputSystem.keyDown(65)) {
-      view.scrollLeft();
+      terrianRenderSystem.scrollLeft();
     }
     if (keyboardInputSystem.keyDown(83)) {
-      view.scrollDown();
+      terrianRenderSystem.scrollDown();
     }
     if (keyboardInputSystem.keyDown(68)) {
-      view.scrollRight();
+      terrianRenderSystem.scrollRight();
     }
 
   }

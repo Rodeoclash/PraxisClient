@@ -9,8 +9,6 @@ part 'coordinate/isometric.dart';
 abstract class Coordinate {
   num x, y;
 
-  Coordinate(this.x, this.y) {
-
-  }
+  Coordinate(this.x, this.y);
 
 }
